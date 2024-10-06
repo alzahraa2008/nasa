@@ -382,11 +382,6 @@
             <input type="number" id="mileage" required>
         </section>
         <section>
-            <label for="flights">Number of Flights:</label>
-            <br><p> Enter the total number of flights you take in a year.</p>
-            <input type="number" id="flights" required>
-        </section>
-        <section>
             <label for="waste">Waste Amount (kg per week):</label>
             <br><p>Provide the amount of waste you generate weekly in kilograms.</p>
             <input type="number" id="waste" required>
@@ -400,22 +395,18 @@
                 const electricity = parseFloat(document.getElementById('electricity').value);
                 const fuel = parseFloat(document.getElementById('fuel').value);
                 const mileage = parseFloat(document.getElementById('mileage').value);
-                const flights = parseFloat(document.getElementById('flights').value);
                 const waste = parseFloat(document.getElementById('waste').value) * 4.33; // monthly (approx. weeks in a month)
         
                 const carbon_per_kwh = 0.5; // kg CO2 per kWh
                 const carbon_per_gallon_fuel = 8.89; // kg CO2 per gallon of fuel
                 const carbon_per_mile = 0.404; // kg CO2 per mile driven
-                const carbon_per_flight = 0.2; // kg CO2 per flight
         
                 const electricity_emissions = electricity * carbon_per_kwh;
                 const fuel_emissions = fuel * carbon_per_gallon_fuel;
                 const mileage_emissions = mileage * carbon_per_mile;
-                const flight_emissions = flights * carbon_per_flight;
-                const waste_emissions = waste * 0.2; // simple assumption
-        
+                const waste_emissions = waste * 0.2; // simple assumption        
                 const total_emissions = (electricity_emissions + fuel_emissions +
-                                         mileage_emissions + flight_emissions + waste_emissions);
+                                         mileage_emissions  + waste_emissions);
         
                 document.getElementById('result').innerText = `Your total carbon footprint is: ${total_emissions.toFixed(2)} kg CO2 per month`;
             }
