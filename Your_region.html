@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenTales</title>
+    <style>
+        body {
+            background-color: #555; /* خلفية الصفحة */
+            color: #555; /* لون النص */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #2b7f2e; /* اللون الأخضر */
+            color: #fff; /* اللون الأبيض للنص */
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        nav ul {
+            list-style-type: none; /* إزالة النقاط من القائمة */
+            margin: 0;
+            padding: 0;
+            display: flex; /* جعل العناصر في سطر واحد */
+            justify-content: center; /* محاذاة العناصر في الوسط */
+            color: #fff; /* اللون الأبيض للنصوص */
+        }
+
+        nav ul li {
+            margin: 0 10px; /* إضافة مسافة بين العناصر */
+        }
+
+        nav ul li a {
+            color: #fff; /* اللون الأبيض للنصوص */
+            text-decoration: none; /* إزالة الخط السفلي */
+            padding: 10px 15px; /* إضافة مساحة حول النص */
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #333; /* تغيير الخلفية عند التمرير */
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #252525;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+            background-color: #333; /* خلفية صندوق البحث */
+            color: #fff; /* لون نص صندوق البحث */
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #444; /* خلفية نتائج البحث */
+            border: 1px solid #444;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 99;
+            display: none; /* Start hidden */
+        }
+
+        .search-results div {
+            padding: 10px;
+            cursor: pointer;
+            color: #fff; /* لون نص نتائج البحث */
+        }
+
+        .search-results div:hover {
+            background-color: #555; /* تغيير الخلفية عند التمرير */
+        }
+
+        #muscle-strain,
+        #torsion {
+            background-color: #444; /* خلفية محتوى المعلومات */
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        #muscle-strain p,
+        #torsion p {
+            color: #d6d0d0; /* لون نص المحتوى */
+        }
+
+        .footer {
+            background-color: #111; /* خلفية التذييل */
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #444;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-logo {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .footer-contact,
+        .footer-pages {
+            margin: 10px 0;
+        }
+
+        .footer-contact p,
+        .footer-pages a {
+            margin: 5px 0;
+            color: #525050bd; /* لون نص التذييل */
+            text-decoration: none;
+        }
+
+        .footer-pages a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        section {
+            padding: 2rem;
+            margin: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            margin-right: 20px;
+        }
+
+        .welcome {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .text-boxes {
+            margin-bottom: 20px;
+        }
+
+        .text-box {
+            margin-bottom: 10px;
+        }
+
+        .products {
+            margin-bottom: 20px;
+        }
+
+        .product {
+            margin-bottom: 10px;
+        }
+
+        .feedback-form {
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .feedback-form h2 {
+            margin-top: 0;
+        }
+
+        .feedback-form textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .feedback-form input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .feedback-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* إضافة لخاصية إخفاء العناصر */
+        .hidden {
+            display: none;
+        }
+    </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نموذج التعليقات</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* تدرج لوني خلفية الصفحة */
+        margin: 0;
+        padding: 0;
+    }
+
+    .feedback-form {
+        background: #fff; /* خلفية النموذج */
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ظل لتأثير ثلاثي الأبعاد */
+        max-width: 600px;
+        margin: 50px auto;
+        border: 1px solid #ddd;
+    }
+
+    .feedback-form h2 {
+        margin-top: 0;
+        color: #333; /* لون عنوان النموذج */
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .feedback-form label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555; /* لون النصوص */
+        font-weight: bold;
+    }
+
+    .feedback-form input[type="text"],
+    .feedback-form input[type="email"],
+    .feedback-form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 16px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .feedback-form input[type="text"]:focus,
+    .feedback-form input[type="email"]:focus,
+    .feedback-form textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* تأثير ظل عند التمرير */
+        outline: none;
+    }
+
+    .feedback-form textarea {
+        height: 150px;
+        resize: vertical; /* يسمح بتغيير حجم مربع النص عموديا */
+    }
+
+    .feedback-form input[type="submit"] {
+        padding: 12px 25px;
+        background-color: #007bff; /* خلفية زر الإرسال */
+        color: #fff; /* لون النص في الزر */
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .feedback-form input[type="submit"]:hover {
+        background-color: #0056b3; /* لون الزر عند التمرير */
+        transform: scale(1.05); /* تكبير الزر عند التمرير */
+    }
+
+    .feedback-form input[type="submit"]:active {
+        background-color: #004494; /* لون الزر عند الضغط */
+        transform: scale(1); /* إعادة حجم الزر إلى حجمه الأصلي */
+    }
+ 
+           .custom-select {
+               position: relative;
+               width: 200px;
+               user-select: none;
+           }
+       
+           .select-selected {
+               background-color: #e5e5e5;
+               padding: 10px;
+               border-radius: 5px;
+               cursor: pointer;
+               border: 1px solid #ccc;
+           }
+       
+           .select-items {
+               display: none;
+               position: absolute;
+               background-color: #f9f9f9;
+               border: 1px solid #ddd;
+               border-radius: 5px;
+               z-index: 99;
+               width: 100%;
+           }
+       
+           .select-items div {
+               padding: 10px;
+               cursor: pointer;
+           }
+       
+           .select-items div:hover {
+               background-color: #ddd;
+           }
+       
+           .hidden {
+            display: none;
+            }
+</style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" class="logo" width="150" height="150">
+        <div class="header-content">
+            <div class="Welcome" style="font-size:40px;"><strong> Tell us a climate story!</strong></div>            <!-- Welcome text at the top -->
+</head>
+
+  
+        <nav>
+             <ul>
+                    <li><a href="index.html" style="font-size:20px;"> <strong>Home</strong></a></li>
+                    <li><a href="stories.html" style="font-size:20px;"><strong>Stories</strong> </a></li>
+                    <li><a href="Your_region.html" style="font-size:20px;"><strong> Your region</strong></a></li>
+                    <li><a href="interactivegame.html" style="font-size:20px;"><strong>Interactive games</strong></a></li>           
+                    <li><a href="feedback.html" style="font-size:20px;"><strong>Your impact</strong></a></li>
+                </ul>
+        </nav>
+
+    </header>
+    <section id="region">
+        <section id="What is your state ">
+            <p>in this we page you will select your state and the website will tell you <strong> CO2 Emissions</strong>, <strong> Climate conditions </strong>and<strong> Mitigation</strong> of the state </p>   
+            <h1>What is your state?</h1>
+            <ol>
+                <li>California</li>
+                <li>Texas</li>
+                <li>New York</li>
+                <li>Florida</li>
+                <li>Illinois</li>
+                <li>Ohio</li>
+                <li>Pennsylvania</li>
+                <li>Michigan</li>
+                <li>Colorado</li>
+                <li>Arizona</li>
+                <li>North Carolina</li>
+                <li>Virginia</li>
+                <li>Georgia</li>
+                <li>Minnesota</li>
+                <li>Louisiana</li>
+                <li>Missouri</li>
+                <li>Alabama</li>
+                <li>Oregon</li>
+                <li>New Mexico</li>
+                <li>Nevada</li>
+            </ol>
+    </section>
+    <!-- Search Box -->
+    <div class="search-container">
+        <input type="text" id="searchInput" class="search-input" placeholder="Search for an option...">
+        <div id="searchResults" class="search-results"></div>
+    </div>
+    
+    <!-- 1.Calofornia Content -->
+    <div id="California" class="hidden"> 
+        <h2> California  </h2>
+        <p><strong>CO2 Emissions:</strong> High due to transportation and industrial sectors, but decreasing with renewable energy adoption.</p>
+        <p><strong>Climate Conditions: </strong>Warm Mediterranean climate, experiencing increased wildfires and droughts.</p>
+        <p><strong>Mitigation: </strong> Aggressive goals to reduce emissions with solar power and electric vehicles.</p>
+     </div>
+    
+    <!-- 2.Texas Content -->
+    <div id="Texas" class="hidden">
+        <h2>Texas</h2>
+        <p><strong>CO2 Emissions:</strong>  One of the highest in the U.S. due to oil and gas production.</p>
+        <p><strong>Climate Conditions:</strong>Variable, with extreme heat, hurricanes, and droughts.</p>
+        <p><strong>Mitigation:</strong>Transitioning to wind power, leading the nation in wind energy</p>
+    </div>
+
+    <!-- 3.New york Content -->
+    <div id="New-York" class="hidden"> 
+        <h2> New york  </h2>
+        <p><strong>CO2 Emissions:</strong> Moderate, driven by transportation and residential energy use.</p>
+        <p> <strong>Climate Conditions: </strong>Temperate climate, but facing rising sea levels and heatwaves.</p>   
+        <p><strong>Mitigation: Investments</strong> in public transit and energy-efficient buildings.</p>
+     </div>
+
+    <!-- 4.Florida Content -->
+    <div id="Florida" class="hidden"> 
+        <h2> Florida  </h2>
+        <p><strong>CO2 Emissions:</strong> High due to tourism and energy consumption.</p>
+        <p><strong>Climate Conditions:</strong> Subtropical, vulnerable to hurricanes and sea-level rise.</p>   
+        <p><strong>  Mitigation: Coastal </strong>defenses and renewable energy efforts, especially solar power.</p>
+     </div>
+
+         <!-- 5.Illinois Content -->
+     <div id="Illinois" class="hidden"> 
+        <h2> Illinois  </h2>
+        <p><strong>CO2 Emissions:</strong> Industrial emissions and coal usage are significant contributors.</p>
+        <p> <strong>Climate Conditions:</strong>Variable, with colder winters and humid summers, prone to flooding.</p>   
+        <p><strong>Mitigation: </strong>Focus on green infrastructure and energy efficiency in buildings.</p>
+     </div>
+    
+     <!-- 6.Ohio -->
+     <div id="Ohio" class="hidden"> 
+        <h2> Ohio  </h2>
+         <p><strong>CO2 Emissions:</strong> High from coal-powered plants and manufacturing.</p>
+         <p><strong>Climate Conditions:</strong>Facing more frequent heatwaves and storms. </p>   
+         <p><strong>Mitigation: </strong>Shift to natural gas and renewables to lower emissions.</p>
+             </div>
+    
+     <!-- 7.Pennsylvania -->
+     <div id="Pennsylvania" class="hidden"> 
+        <h2> Pennsylvania </h2>
+         <p><strong>CO2 Emissions: </strong>Among the highest due to coal and natural gas.</p>
+         <p><strong>Climate Conditions:</strong> Milder winters, but increased flooding and storms. </p>   
+         <p><strong>Mitigation: </strong>Reducing reliance on coal and moving toward wind and solar.</p>
+         </div>
+
+     <!-- 8.Michigan -->
+    <div id="Michigan" class="hidden"> 
+        <h2> Michigan  </h2>
+         <p><strong>CO2 Emissions:</strong> Driven by manufacturing and energy sectors.</p>
+         <p><strong>Climate Conditions:</strong> Experiencing more extreme cold and flooding.</p>   
+         <p><strong>Mitigation: </strong>Climate-smart agriculture and green energy adoption.</p>
+    </div>
+
+     <!-- 9. Colorado-->
+    <div id="Colorado" class="hidden"> 
+        <h2> Colorado  </h2>
+         <p><strong>CO2 Emissions: </strong>Moderate but rising due to population growth. </p>
+         <p><strong>Climate Conditions: </strong>Mountainous, seeing increased wildfires and heat.</p>   
+         <p><strong>Mitigation: </strong> Focus on wind and solar to power homes and industries.</p>
+    </div>
+
+     <!-- 10. Arizona -->
+     <div id="Arizona" class="hidden"> 
+        <h2> Arizona  </h2>
+         <p><strong>CO2 Emissions:</strong> High from electricity generation, especially coal.</p>
+         <p><strong>Climate Conditions:</strong>Desert climate with rising temperatures and droughts.</p>   
+         <p><strong>Mitigation:</strong> Large-scale solar energy projects and water conservation measures.</p>
+             </div>
+    <!-- 11. North Carolina-->
+    <div id="North-Carolina" class="hidden"> 
+        <h2> North Carolina  </h2>
+         <p><strong>CO2 Emissions:</strong> Moderate from transportation and energy sectors.</p>
+         <p><strong> Climate Conditions:</strong> Humid, subtropical with hurricanes and floods.</p>   
+         <p><strong>Mitigation: </strong>Transition to renewable energy and coastal resilience planning. </p>
+             </div>
+    <!-- 12. Virginia-->
+    <div id="Virginia" class="hidden"> 
+        <h2> Virginia  </h2>
+         <p><strong>CO2 Emissions:</strong> Driven by transportation and power plants.</p>
+         <p><strong>Climate Conditions: </strong>Humid subtropical, with rising sea levels.</p>   
+         <p><strong>Mitigation:</strong> Energy efficiency programs and investment in offshore wind.</p>
+    </div>
+    <!-- 13. Georgia-->
+    <div id="Georgia" class="hidden"> 
+        <h2> Georgia  </h2>
+         <p><strong>CO2 Emissions:</strong> High, primarily from transportation.</p>
+         <p><strong>Climate Conditions: </strong>Hot and humid summers, increased flooding.</p>   
+         <p><strong>Mitigation: </strong>Renewable energy programs and investment in green infrastructure.</p>
+    </div>
+    <!-- 14. Minnesota -->
+    <div id="Minnesota" class="hidden">
+        <h2> Minnesota  </h2>
+        <p><strong>CO2 Emissions:</strong> Moderate from industrial and agricultural activities.</p>
+        <p> <strong>Climate Conditions:</strong>Variable, Cold winters, experiencing more intense storms.</p>   -
+        <p><strong>Mitigation: </strong> Transition to wind energy and improvements in flood management.</p>
+    </div>
+    <!-- 15. Louisiana -->
+    <div id="Louisiana" class="hidden">
+        <h2> Louisiana  </h2>
+        <p><strong>CO2 Emissions:</strong> High due to the oil and gas industry..</p>
+        <p> <strong>Climate Conditions:</strong>Variable, Hot and humid, with frequent hurricanes and flooding.</p>  
+        <p><strong>Mitigation: </strong> Coastal restoration and investment in renewable energy sources.</p>
+    </div>
+    <!-- 16. Missouri -->
+    <div id="Missouri" class="hidden">
+        <h2> Missouri  </h2>
+        <p><strong>CO2 Emissions:</strong> High from coal-fired power plants.</p>
+        <p> <strong>Climate Conditions:</strong>Variable, Extreme heat and droughts.</p>   -
+        <p><strong>Mitigation: </strong> Focus on energy efficiency and renewable energy expansion.</p>
+    </div>
+    <!-- 17. Alabama -->
+    <div id="Alabama" class="hidden">
+        <h2> Alabama  </h2>
+        <p><strong>CO2 Emissions:</strong> High from transportation and industrial sectors.</p>
+        <p><strong>Climate Conditions:</strong>Variable, Warm and humid, increased risk of flooding and storms.</p>   -
+        <p><strong>Mitigation: </strong> Initiatives to boost solar power and community resilience.</p>
+    </div>
+    <!-- 18. Oregon -->
+    <div id="Oregon" class="hidden">
+        <h2> Oregon  </h2>
+        <p><strong>CO2 Emissions:</strong> Low, with strong renewable energy policies.</p>
+        <p> <strong>Climate Conditions:</strong>Variable, Mild with increasing wildfires.</p>  
+        <p><strong>Mitigation: </strong> Leading in green infrastructure and forest management.</p>
+            </div>
+
+    <!-- 19. New Mexico -->
+    <div id="New-Mexico" class="hidden">
+        <h2> New Mexico  </h2>
+        <p><strong>CO2 Emissions:</strong> High from oil and gas industries.</p>
+        <p> <strong>Climate Conditions:</strong>Variable, Arid, with water scarcity and heat waves.</p>  
+        <p><strong>Mitigation: </strong> Investments in solar and wind power, plus water conservation efforts.</p>
+            </div>
+    <!-- 20. Nevada -->
+    <div id="Nevada" class="hidden">
+        <h2> Nevada  </h2>
+        <p><strong>CO2 Emissions:</strong> Moderate, primarily from transportation and tourism.</p>
+        <p> <strong>Climate Conditions:</strong>Variable, Desert climate, seeing rising temperatures.</p>  
+        <p><strong>Mitigation: </strong> Major focus on solar energy and sustainable water use.</p>
+    </div>
+
+
+    
+ 
+    
+    <script>
+        const data = [
+            { value: "California", text: "1 - California" },
+            { value: "Texas", text: "2 - Texas" },
+            { value: "New-York", text: "3 - New York" },
+            { value: "Florida", text: "4 - Florida" },
+            { value: "Illinois", text: "5 - Illinois" },
+            { value: "Ohio", text: "6- Ohio" },
+            { value: "Pennsylvania", text: "7- Pennsylvania" },
+            { value: "Michigan", text: "8- Michigan" },
+            { value: "Colorado", text: "9- Colorado" },
+            { value: "Arizona", text: "10- Arizona" },
+            { value: "North-Carolina", text: "11 - North Carolina" },
+            { value: "Virginia", text: "12- Virginia" },
+            { value: "Georgia", text: "13- Georgia" },
+            { value: "Minnesota", text: "14- Minnesota" },
+            { value: "Louisiana", text: "15- Louisiana" },
+            { value: "Missouri", text: "16- Missouri" },
+            { value: "Alabama", text: "17- Alabama" },
+            { value: "Oregon", text: "18- Oregon" },
+            { value: "New-Mexico", text: "19- New Mexico" },
+            { value: "Nevada", text: "20- Nevada" }
+        ];
+    
+        const searchInput = document.getElementById('searchInput');
+        const searchResults = document.getElementById('searchResults');
+    
+        searchInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase();
+            searchResults.innerHTML = '';
+            searchResults.style.display = 'none';
+    
+            if (query) {
+                const filteredData = data.filter(item => item.text.toLowerCase().includes(query));
+                if (filteredData.length > 0) {
+                    searchResults.style.display = 'block';
+                    filteredData.forEach(item => {
+                        const div = document.createElement('div');
+                        div.textContent = item.text;
+                        div.dataset.value = item.value;
+                        searchResults.appendChild(div);
+                    });
+                }
+            }
+        });
+    
+        searchResults.addEventListener('click', function(event) {
+            const selectedOption = event.target;
+            if (selectedOption.dataset.value) {
+                searchInput.value = selectedOption.textContent;
+                searchResults.style.display = 'none';
+                showContent(selectedOption.dataset.value);
+            }
+        });
+    
+        function showContent(value) {
+            // Hide all content divs
+            const states = [
+                'California', 'Texas', 'New-York', 'Florida', 'Illinois', 'Ohio', 
+                'Pennsylvania', 'Michigan', 'Colorado', 'Arizona', 'North-Carolina', 
+                'Virginia', 'Georgia', 'Minnesota', 'Louisiana', 'Missouri', 
+                'Alabama', 'Oregon', 'New-Mexico', 'Nevada'
+            ];
+    
+            // Hide all state elements
+            states.forEach(state => {
+                const element = document.getElementById(state);
+                if (element) {
+                    element.classList.add('hidden');
+                    console.log(`Hiding ${state}`);
+                }
+            });
+    
+            // Show the selected state content
+            const selectedElement = document.getElementById(value);
+            if (selectedElement) {
+                selectedElement.classList.remove('hidden');
+                console.log(`Showing ${value}`);
+            }
+        }
+    
+        // Hide results if click outside
+        document.addEventListener('click', function(event) {
+            if (!searchResults.contains(event.target) && event.target !== searchInput) {
+                searchResults.style.display = 'none';
+            }
+        });
+    </script>
+    
+       <!-- Footer -->
+       <footer class="footer">
+        <img src="logo.png" alt="Logo" class="footer-logo">
+        <div class="footer-contact">
+            <h2>Green Tales</h2>
+        </div>
+        <main>
+            <h2> Contact Us</h2>
+            <p>If you have any questions, feel free to contact us using the form below.</p>
+            <!-- نموذج الاتصال -->
+        </main>
+        <footer>
+            <p>&copy; 2024 GreenTales All rights reserved  .</p>
+        </footer>
+    
+   
+</body>
+</html>

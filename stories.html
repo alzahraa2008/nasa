@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenTales</title>
+    <style>
+        body {
+            background-color: #000000; /* اللون الأسود */
+            color: #555; /* لون النص */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #2b7f2e; /* اللون الأخضر */
+            color: #fff; /* اللون الأبيض للنص */
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        nav ul {
+            list-style-type: none; /* إزالة النقاط من القائمة */
+            margin: 0;
+            padding: 0;
+            display: flex; /* جعل العناصر في سطر واحد */
+            justify-content: center; /* محاذاة العناصر في الوسط */
+            color: #fff; /* اللون الأبيض للنصوص */
+        }
+
+        nav ul li {
+            margin: 0 10px; /* إضافة مسافة بين العناصر */
+        }
+
+        nav ul li a {
+            color: #fff; /* اللون الأبيض للنصوص */
+            text-decoration: none; /* إزالة الخط السفلي */
+            padding: 10px 15px; /* إضافة مساحة حول النص */
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #333; /* تغيير الخلفية عند التمرير */
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #252525;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+            background-color: #333; /* خلفية صندوق البحث */
+            color: #fff; /* لون نص صندوق البحث */
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #444; /* خلفية نتائج البحث */
+            border: 1px solid #444;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 99;
+            display: none; /* Start hidden */
+        }
+
+        .search-results div {
+            padding: 10px;
+            cursor: pointer;
+            color: #fff; /* لون نص نتائج البحث */
+        }
+
+        .search-results div:hover {
+            background-color: #555; /* تغيير الخلفية عند التمرير */
+        }
+
+        #muscle-strain,
+        #torsion {
+            background-color: #444; /* خلفية محتوى المعلومات */
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        #muscle-strain p,
+        #torsion p {
+            color: #d6d0d0; /* لون نص المحتوى */
+        }
+
+        .footer {
+            background-color: #111; /* خلفية التذييل */
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #444;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-logo {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .footer-contact,
+        .footer-pages {
+            margin: 10px 0;
+        }
+
+        .footer-contact p,
+        .footer-pages a {
+            margin: 5px 0;
+            color: #525050bd; /* لون نص التذييل */
+            text-decoration: none;
+        }
+
+        .footer-pages a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        section {
+            padding: 2rem;
+            margin: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            margin-right: 20px;
+        }
+
+        .welcome {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .text-boxes {
+            margin-bottom: 20px;
+        }
+
+        .text-box {
+            margin-bottom: 10px;
+        }
+
+        .products {
+            margin-bottom: 20px;
+        }
+
+        .product {
+            margin-bottom: 10px;
+        }
+
+        .feedback-form {
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .feedback-form h2 {
+            margin-top: 0;
+        }
+
+        .feedback-form textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .feedback-form input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .feedback-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* إضافة لخاصية إخفاء العناصر */
+        .hidden {
+            display: none;
+        }
+    </style>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نموذج التعليقات</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* تدرج لوني خلفية الصفحة */
+        margin: 0;
+        padding: 0;
+    }
+
+    .feedback-form {
+        background: #fff; /* خلفية النموذج */
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ظل لتأثير ثلاثي الأبعاد */
+        max-width: 600px;
+        margin: 50px auto;
+        border: 1px solid #ddd;
+    }
+
+    .feedback-form h2 {
+        margin-top: 0;
+        color: #333; /* لون عنوان النموذج */
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .feedback-form label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555; /* لون النصوص */
+        font-weight: bold;
+    }
+
+    .feedback-form input[type="text"],
+    .feedback-form input[type="email"],
+    .feedback-form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 16px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .feedback-form input[type="text"]:focus,
+    .feedback-form input[type="email"]:focus,
+    .feedback-form textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* تأثير ظل عند التمرير */
+        outline: none;
+    }
+
+    .feedback-form textarea {
+        height: 150px;
+        resize: vertical; /* يسمح بتغيير حجم مربع النص عموديا */
+    }
+
+    .feedback-form input[type="submit"] {
+        padding: 12px 25px;
+        background-color: #007bff; /* خلفية زر الإرسال */
+        color: #fff; /* لون النص في الزر */
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .feedback-form input[type="submit"]:hover {
+        background-color: #0056b3; /* لون الزر عند التمرير */
+        transform: scale(1.05); /* تكبير الزر عند التمرير */
+    }
+
+    .feedback-form input[type="submit"]:active {
+        background-color: #004494; /* لون الزر عند الضغط */
+        transform: scale(1); /* إعادة حجم الزر إلى حجمه الأصلي */
+    }
+</style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" class="logo" width="150" height="150">
+        <div class="header-content">
+            <div class="Welcome" style="font-size:40px;"><strong> Tell us a climate story!</strong></div>
+                        <!-- Welcome text at the top -->
+</head>
+
+  
+        <nav>
+             <ul>
+                    <li><a href="index.html" style="font-size:20px;"> <strong>Home</strong></a></li>
+                    <li><a href="stories.html" style="font-size:20px;"><strong>Stories</strong> </a></li>
+                    <li><a href="Your_region.html" style="font-size:20px;"><strong> Your region</strong></a></li>
+                    <li><a href="interactivegame.html" style="font-size:20px;"><strong>Interactive games</strong></a></li>           
+                    <li><a href="feedback.html" style="font-size:20px;"><strong>Your imapct</strong></a></li>
+                </ul>
+        </nav>
+
+    </header>
+    <section>
+    <h2>Here we have another stories to increase your knowledge about the impact of climate change.</h2>
+</section>
+    <section id="Prevention">
+        <h2>The First story about American city ( New York)</h2>
+        <p>In cities across the United States, the air holds more than meets the eye. Pollution, a hidden yet constant traveler, knows no borders and takes on many forms, from microscopic particles to vast plumes of greenhouse gases. In New York City, where the goal is to achieve carbon neutrality by 2050, tackling human-caused emissions has become a community effort. This is where Róisín Commane, an atmospheric chemist from Columbia University, plays a key role. Commane, along with her team of experts and community members, is on a mission to track and reduce the city’s greenhouse gas emissions.</p>
+        <p>Commane’s investigation is far from simple. From the surface to the sky, she scours the city, looking for unidentified sources of emissions, whether from old wastewater treatment plants or landfills long forgotten. Her work is supported by the New York State Energy Research & Development Authority (NYSERDA), NOAA, and the U.S. Greenhouse Gas Center (US GHG Center). Together, they aim to improve emission estimates by using a network of sensors spread across the city, combined with NASA satellite and airborne data. This combination is key to understanding not just where emissions come from, but how they interact with other pollutants in the atmosphere.</p>
+        <p>To uncover these hidden emissions, Commane and her team use a variety of tools. Drones soar above the city, portable sensors measure gases from the ground, and fixed stations monitor carbon dioxide, carbon monoxide, and methane levels. Commane is particularly interested in how these greenhouse gases interact with air pollution, primarily caused by fossil fuels burned in power plants and vehicles. The burning of fossil fuels releases harmful gases into the air, creating a toxic mix that not only contributes to climate change but also affects air quality.</p>
+        <p>Since starting her work in 2019, Commane’s team has discovered some surprising things about New York. Though the city is the most densely populated in the U.S., it also has an estimated 7 million trees. These trees play a crucial role in absorbing carbon dioxide, especially in the summer, helping to reduce overall greenhouse gas levels. However, nature is not always a straightforward ally. Certain types of oak trees emit chemicals that react with pollutants from vehicles and buildings, creating ground-level ozone, or smog, which is dangerous to humans. Many existing models that estimate city emissions fail to account for this interaction between vegetation and air quality, something Commane and her team are working to improve.</p>
+        <p>During the COVID-19 pandemic, the streets of New York quieted, and with less traffic came a noticeable drop in nitrogen oxides—pollutants that contribute to smog. They also recorded a decline in carbon monoxide, which is typically produced by idling vehicles. Yet, even with reduced activity, these levels were still higher than many expected, revealing just how pervasive the issue of pollution remains in urban areas.</p>
+        <p>But this story isn’t just about New York City. Globally, urban areas are responsible for an estimated 70% of greenhouse gas emissions. The challenges faced by New York mirror those in cities like Chicago, Los Angeles, and Phoenix, where traffic congestion and heat contribute to smog and poor air quality. In port cities like Baltimore and Houston, emissions from ships and refineries add to the mix. Despite the differences in geography and industry, cities share a unique ability to drive change, and with the right tools and data, they can make a significant impact on both emissions and public health.</p>
+        <p>Commane’s efforts are not isolated. In recent years, NASA and NOAA have conducted large-scale missions to map air pollutants across North American cities. These missions, using aircraft, mobile labs, and even weather balloons, have tracked air pollution from the ground to the upper layers of the atmosphere. By mapping these pollutants, researchers can better understand where they come from and how they change over time, which neighborhoods are most affected, and how to better estimate emissions.</p>
+        <p>The work being done in New York City has the potential to influence cities around the world. As Commane notes, the data they gather in New York will not only help the millions who live there but can be applied to other cities facing similar challenges. If they can figure out how to effectively tackle emissions in New York, they can do it anywhere.</p>
+        <p>This ongoing collaboration between scientists, city leaders, and residents is essential for making meaningful progress. Together, they are writing a new chapter in the fight against climate change, one that shows that cities, with their dense populations and resources, are not just part of the problem—they can also be a big part of the solution.  </p>
+    </section>   
+    <section>   
+        <h2>The Thwaites Glacier and Its Impact on Sea Level Rise</h2>
+        <p>In the heart of Antarctica, the Thwaites Glacier looms large, capturing the attention of scientists and climate experts around the globe. Often dubbed the "Doomsday Glacier," it is a critical focus in the fight against climate change. This massive glacier is melting at an alarming rate, raising concerns about its potential impact on global sea levels.</p>
+        <p>Recent research has revealed that the Thwaites Glacier is losing ice faster than previously thought, which could result in significant sea-level rise over the coming decades. If it were to collapse completely, estimates suggest that global sea levels could rise by more than three meters (approximately ten feet), inundating coastal cities and displacing millions of people.</p>
+        <p>To monitor this critical situation, scientists have deployed a range of advanced technologies, including satellites and underwater robots, to gather data on the glacier's behavior and the surrounding environment. Their findings underscore the urgent need for action to combat climate change and protect vulnerable coastal communities.</p>
+        <p>As we face the reality of rising sea levels, the story of the Thwaites Glacier serves as a stark reminder of the interconnectedness of our planet. The melting of this glacier is not just an Antarctic issue; it is a global crisis that demands collective efforts to mitigate climate change and safeguard our future.</p>
+        <p><strong>Source:</strong> "The 'Doomsday Glacier' is melting at an alarming rate." BBC News. August 30, 2022. <a href="https://www.bbc.com/news/science-environment-62766338"> Read here.</a></p>
+    </section>   
+    <section>     
+        <h2>Climate Change's Impact on Coral Reefs</h2>
+        <p>Coral reefs, often referred to as the "rainforests of the sea," are some of the most diverse and vibrant ecosystems on our planet. However, they are facing unprecedented threats due to climate change. Rising ocean temperatures, driven by global warming, are causing widespread coral bleaching, a phenomenon that disrupts the delicate balance of these underwater habitats.</p>
+        <p>Coral bleaching occurs when corals become stressed, often due to increased temperatures or pollution, and expel the algae that live in their tissues. This algae, known as zooxanthellae, is essential for the coral's survival, providing it with nutrients and color. When the algae are expelled, the corals turn white and become vulnerable to disease and mortality. In recent years, mass bleaching events have devastated coral populations across the globe, threatening marine biodiversity and the livelihoods of millions of people who depend on healthy reefs.</p>            
+        <p>Scientists are racing against time to develop strategies to restore and protect coral reefs. Efforts include breeding programs aimed at creating more resilient coral species that can withstand rising temperatures and increased acidification. Additionally, researchers are investigating ways to enhance coral health through artificial means, such as probiotics or nutrient supplementation.</p>
+        <p>The impact of coral reef decline extends beyond the ocean. These ecosystems provide essential services, including coastal protection, tourism revenue, and habitat for countless marine species. The loss of coral reefs would have far-reaching consequences, affecting food security and the economy for communities reliant on fishing and tourism.</p>
+        <p>As global temperatures continue to rise, the urgency to address climate change becomes more apparent. Protecting coral reefs is not only vital for marine life but also for the health of our planet and the well-being of future generations. The fight to save these underwater treasures is a story of resilience, innovation, and the collective responsibility we share in combating climate change.</p>
+        <p><srong>Source:</srong>"Coral reefs are in crisis – can scientists save them?" National Geographic. June 30, 2021. <a href="https://www.nationalgeographic.com/environment/article/coral-reefs-are-in-crisis-can-scientists-save-them"> Read here.</a></p>
+    </section>   
+     <section>
+        <h2>The Disappearing Arctic Ice and Its Global Impact</h2>
+        <p>Far in the northern reaches of our planet, the Arctic is undergoing a dramatic transformation. Once a landscape of seemingly endless ice, it is now shrinking at a pace that alarms scientists around the world. Arctic sea ice, a crucial regulator of global climate, is melting faster than at any point in recorded history. This story of disappearing ice is one of the most visible and troubling signs of climate change.</p>
+        <p>Each year, the Arctic ice cap shrinks and grows with the changing seasons. However, in recent decades, the summer ice melt has accelerated, with more ice disappearing and less returning during the colder months. This decline not only impacts the local wildlife, such as polar bears, seals, and walruses that depend on the ice for survival, but it also has far-reaching consequences for the entire planet.</p>
+        <p>One of the most critical roles Arctic ice plays is in reflecting sunlight back into space. As the ice melts, it exposes more of the darker ocean surface, which absorbs heat instead of reflecting it. This process, known as the albedo effect, leads to further warming, creating a feedback loop that accelerates the melting. The warming Arctic is contributing to rising sea levels and altering weather patterns across the globe, including more extreme storms and shifts in precipitation.</p>
+        <p>The melting Arctic ice is also opening up new shipping routes and opportunities for resource extraction, bringing additional risks to this fragile environment. Increased human activity in the region could exacerbate pollution and habitat destruction, further endangering the ecosystems already struggling to survive.</p>
+        <p>Despite these challenges, the Arctic remains a critical focus for scientists and environmental advocates. Efforts are underway to better understand the dynamics of ice melt and to implement strategies that can mitigate the effects of climate change. But as the ice continues to disappear, the urgency of global action becomes clearer. The story of the Arctic ice melt is a stark reminder of the interconnectedness of climate systems and the need for swift, coordinated efforts to protect the planet.</p>
+        <p><strong>Source:</strong> "Arctic ice is melting faster than ever – what it means for the world." The Guardian. October 5, 2021.<a href="https://www.theguardian.com/environment/2021/oct/05/arctic-ice-melting-faster-than-ever-what-it-means-for-the-world"> Read here.</a></p>
+    </section>
+    <section>    
+    <h2>The Rise of Renewable Energy in the Fight Against Climate Change</h2>
+     <p> As the world grapples with the pressing challenges of climate change, a remarkable transformation is underway in the energy sector. The rise of renewable energy sources—such as solar, wind, and hydroelectric power—has emerged as a beacon of hope in the fight against global warming. These sustainable alternatives are not only reducing reliance on fossil fuels but also paving the way for a cleaner, more resilient energy future.
+     <p> In recent years, the cost of renewable energy technologies has plummeted, making them more accessible than ever. Solar energy, for instance, has seen a dramatic reduction in costs—down more than 80% since 2010—allowing it to become one of the most competitive forms of energy generation worldwide. Wind energy has followed suit, with advances in turbine technology leading to increased efficiency and capacity. These developments have spurred investments and initiatives globally, with countries like Denmark and Germany leading the charge in integrating renewables into their energy grids.</p>
+     <p>This shift toward renewable energy is crucial for reducing greenhouse gas emissions, which are primarily driven by burning fossil fuels for electricity and transportation. According to the International Energy Agency (IEA), transitioning to renewable sources could help limit global warming to 1.5 degrees Celsius, a target set by the Paris Agreement. Countries around the world are setting ambitious targets to achieve net-zero emissions by mid-century, and renewable energy plays a central role in these plans.</p>
+     <p>However, the transition to renewable energy is not without its challenges. Intermittency issues—such as the variability of solar and wind resources—require innovative solutions to ensure a stable and reliable energy supply. Energy storage technologies, like batteries and pumped hydro storage, are being developed to address these concerns, allowing excess energy generated during peak production times to be stored and used when demand is high.</p>
+     <p>Community engagement is also critical in this transition. Grassroots movements and local initiatives are helping to promote the adoption of renewable energy solutions, from community solar projects to cooperative wind farms. Empowering communities to take control of their energy sources fosters resilience and reduces vulnerability to climate impacts.</p>
+     <p>The rise of renewable energy signifies a pivotal moment in the global response to climate change. It offers a pathway to not only reduce emissions but also create jobs, stimulate economic growth, and enhance energy security. As nations strive to meet their climate goals, the transition to renewable energy serves as a testament to humanity's capacity for innovation and collaboration in the face of adversity.</p>
+        <p><strong>Source:  </strong>"Renewable Energy and Climate Change." United Nations Environment Programme (UNEP). 2021. <a href=""> Read here.</a></p>
+    </section> 
+    <section>
+    <h2>The Impact of Deforestation on Climate Change</h2>
+        <p>Deforestation is one of the most pressing environmental issues of our time, playing a significant role in exacerbating climate change. As forests are cleared for agriculture, urban development, and logging, vast amounts of carbon dioxide (CO2) are released into the atmosphere, contributing to global warming and disrupting the delicate balance of our planet’s ecosystems.</p>
+        <p>Forests are often referred to as the "lungs of the Earth," as they absorb CO2 during photosynthesis and store carbon in their biomass. However, according to the Food and Agriculture Organization (FAO), approximately 10 million hectares of forest are lost each year. This loss not only releases the stored carbon back into the atmosphere but also reduces the planet’s capacity to absorb CO2 in the future. It is estimated that deforestation accounts for around 11% of global greenhouse gas emissions, making it a significant contributor to climate change.</p>
+        <p>The consequences of deforestation extend far beyond carbon emissions. Forests provide vital habitats for countless species, and their destruction leads to biodiversity loss and extinction. Indigenous communities that rely on forests for their livelihoods and cultural practices are also severely impacted, facing displacement and loss of resources.</p>
+        <p>In addition, deforestation disrupts local and global water cycles. Trees play a crucial role in maintaining soil moisture and regulating rainfall patterns. When forests are cleared, the resulting changes can lead to soil erosion, decreased water quality, and increased flooding or droughts in surrounding areas.</p>
+        <p>Efforts to combat deforestation are gaining momentum globally. Initiatives like the United Nations' REDD+ program (Reducing Emissions from Deforestation and Forest Degradation) aim to incentivize developing countries to protect their forests by providing financial support for sustainable land management practices. Community-led reforestation projects and agroforestry systems are also proving effective in restoring degraded lands while providing economic opportunities for local populations.</p>
+        <p>Public awareness campaigns and advocacy efforts are crucial in driving change. By promoting sustainable consumer choices—such as supporting products certified by organizations like the Forest Stewardship Council (FSC)—individuals can contribute to reducing the demand for products that contribute to deforestation.</p>
+        <p>The fight against deforestation is not just an environmental issue; it is a critical component of the broader struggle against climate change. Protecting and restoring forests is essential for maintaining biodiversity, supporting Indigenous rights, and ensuring a sustainable future for generations to come.</p>
+        <p><strong> Source: </strong>"State of the World’s Forests 2020." Food and Agriculture Organization (FAO). 2020.<a href="https://www.fao.org/state-of-forests/en/">Read here.</a></p>
+        
+    </section>
+   
+   
+   
+ <!-- Footer -->
+ <footer class="footer">
+    <img src="logo.png" alt="Logo" class="footer-logo">
+    <div class="footer-contact">
+        <h2>Green Tales</h2>
+    </div>
+    <main>
+        <h2> Contact Us</h2>
+        <p>If you have any questions, feel free to contact us using the form below.</p>
+        <!-- نموذج الاتصال -->
+    </main>
+    <footer>
+        <p>&copy; 2024 GreenTales All rights reserved  .</p>
+    </footer>
+
+</body>
+</html>

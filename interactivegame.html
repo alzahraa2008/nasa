@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenTales</title>
+    <style>
+        body {
+            background-color: #555; /* خلفية الصفحة */
+            color: #555; /* لون النص */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #2b7f2e; /* اللون الأخضر */
+            color: #fff; /* اللون الأبيض للنص */
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        nav ul {
+            list-style-type: none; /* إزالة النقاط من القائمة */
+            margin: 0;
+            padding: 0;
+            display: flex; /* جعل العناصر في سطر واحد */
+            justify-content: center; /* محاذاة العناصر في الوسط */
+            color: #fff; /* اللون الأبيض للنصوص */
+        }
+
+        nav ul li {
+            margin: 0 10px; /* إضافة مسافة بين العناصر */
+        }
+
+        nav ul li a {
+            color: #fff; /* اللون الأبيض للنصوص */
+            text-decoration: none; /* إزالة الخط السفلي */
+            padding: 10px 15px; /* إضافة مساحة حول النص */
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #333; /* تغيير الخلفية عند التمرير */
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #252525;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+            background-color: #333; /* خلفية صندوق البحث */
+            color: #fff; /* لون نص صندوق البحث */
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #444; /* خلفية نتائج البحث */
+            border: 1px solid #444;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 99;
+            display: none; /* Start hidden */
+        }
+
+        .search-results div {
+            padding: 10px;
+            cursor: pointer;
+            color: #fff; /* لون نص نتائج البحث */
+        }
+
+        .search-results div:hover {
+            background-color: #555; /* تغيير الخلفية عند التمرير */
+        }
+
+        #muscle-strain,
+        #torsion {
+            background-color: #444; /* خلفية محتوى المعلومات */
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        #muscle-strain p,
+        #torsion p {
+            color: #d6d0d0; /* لون نص المحتوى */
+        }
+
+        .footer {
+            background-color: #111; /* خلفية التذييل */
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #444;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-logo {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .footer-contact,
+        .footer-pages {
+            margin: 10px 0;
+        }
+
+        .footer-contact p,
+        .footer-pages a {
+            margin: 5px 0;
+            color: #525050bd; /* لون نص التذييل */
+            text-decoration: none;
+        }
+
+        .footer-pages a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        section {
+            padding: 2rem;
+            margin: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            margin-right: 20px;
+        }
+
+        .welcome {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .text-boxes {
+            margin-bottom: 20px;
+        }
+
+        .text-box {
+            margin-bottom: 10px;
+        }
+
+        .products {
+            margin-bottom: 20px;
+        }
+
+        .product {
+            margin-bottom: 10px;
+        }
+
+        .feedback-form {
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .feedback-form h2 {
+            margin-top: 0;
+        }
+
+        .feedback-form textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .feedback-form input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .feedback-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* إضافة لخاصية إخفاء العناصر */
+        .hidden {
+            display: none;
+        }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* تدرج لوني خلفية الصفحة */
+        margin: 0;
+        padding: 0;
+    }
+
+    .feedback-form {
+        background: #fff; /* خلفية النموذج */
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ظل لتأثير ثلاثي الأبعاد */
+        max-width: 600px;
+        margin: 50px auto;
+        border: 1px solid #ddd;
+    }
+
+    .feedback-form h2 {
+        margin-top: 0;
+        color: #333; /* لون عنوان النموذج */
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .feedback-form label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555; /* لون النصوص */
+        font-weight: bold;
+    }
+
+    .feedback-form input[type="text"],
+    .feedback-form input[type="email"],
+    .feedback-form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 16px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .feedback-form input[type="text"]:focus,
+    .feedback-form input[type="email"]:focus,
+    .feedback-form textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* تأثير ظل عند التمرير */
+        outline: none;
+    }
+
+    .feedback-form textarea {
+        height: 150px;
+        resize: vertical; /* يسمح بتغيير حجم مربع النص عموديا */
+    }
+
+    .feedback-form input[type="submit"] {
+        padding: 12px 25px;
+        background-color: #007bff; /* خلفية زر الإرسال */
+        color: #fff; /* لون النص في الزر */
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .feedback-form input[type="submit"]:hover {
+        background-color: #0056b3; /* لون الزر عند التمرير */
+        transform: scale(1.05); /* تكبير الزر عند التمرير */
+    }
+
+    .feedback-form input[type="submit"]:active {
+        background-color: #004494; /* لون الزر عند الضغط */
+        transform: scale(1); /* إعادة حجم الزر إلى حجمه الأصلي */
+    }
+    label {
+            font-size: 1.2em; /* Greater font size for labels */
+            font-weight: bold; /* Optional: make labels bold */
+        }
+        p {
+            font-size: 1em; /* Smaller font size for paragraphs */
+        }
+        .custom-button {
+            background-color: #4CAF50; /* Green background */
+            border: none;              /* No border */
+            color: white;              /* White text */
+            padding: 15px 32px;        /* Padding (height and width) */
+            text-align: center;        /* Center the text */
+            text-decoration: none;     /* No underline */
+            display: inline-block;     /* Make it inline */
+            font-size: 16px;           /* Increase text size */
+            margin: 10px 5px;          /* Space around the button */
+            cursor: pointer;           /* Pointer cursor on hover */
+            border-radius: 12px;       /* Rounded corners */
+            box-shadow: 0 4px #999;    /* 3D shadow effect */
+            
+        }
+
+        .custom-button:hover {
+            background-color: #3e8e41; /* Darker green on hover */
+            box-shadow: 0 6px #666;    /* Adjust shadow on hover */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+
+        .custom-button:active {
+            background-color: #2E7D32; /* Darkest green when clicked */
+            box-shadow: 0 2px #666;    /* Smaller shadow when clicked */
+            transform: translateY(4px); /* Press down effect */
+        }
+        .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 25%;
+        }
+</style>
+</head>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" class="logo" width="150" height="150">
+        <div class="header-content">
+            <div class="Welcome" style="font-size:40px;"><strong> Tell us a climate story!</strong></div>
+                        <!-- Welcome text at the top -->
+
+  
+        <nav>
+             <ul>
+                    <li><a href="home.html" style="font-size:20px;"> <strong>Home</strong></a></li>
+                    <li><a href="stories.html" style="font-size:20px;"><strong>Stories</strong> </a></li>
+                    <li><a href="Your_region.html" style="font-size:20px;"><strong> Your region</strong></a></li>
+                    <li><a href="interactivegame.html" style="font-size:20px;"><strong>Interactive games</strong></a></li>           
+                    <li><a href="feedback.html" style="font-size:20px;"><strong>Your imapct</strong></a></li>
+                </ul>
+        </nav>
+</header>
+ 
+<section id="Prevention">
+    <h1>1. Carbon Footprint Calculator</h1>
+    <p>This game estimates your approximate annual contribution to <strong> carbon dioxide </strong> emissions.    </p>
+    <ul>
+        <form id="carbonFootprintForm">
+            <section> 
+            <label for="electricity">Electricity Consumption (kWh per year):</label>
+            <p> Enter the total amount of electricity you consume in kilowatt-hours over the year.</p>
+            <input type="number" id="electricity" required>
+        </section>
+            <section>
+            <label for="fuel">Fuel Amount (liters per mounth):</label>
+            <br> <p> Specify the number of liters of fuel you use in a year.</p>
+            <input type="number" id="fuel" required>
+        </section>
+        <section>
+            <label for="mileage">monthly Mileage (miles):</label>
+            <br><p> Input the total distance you drive in miles over the year.</p>
+            <input type="number" id="mileage" required>
+        </section>
+        <section>
+            <label for="flights">Number of Flights:</label>
+            <br><p> Enter the total number of flights you take in a year.</p>
+            <input type="number" id="flights" required>
+        </section>
+        <section>
+            <label for="waste">Waste Amount (kg per week):</label>
+            <br><p>Provide the amount of waste you generate weekly in kilograms.</p>
+            <input type="number" id="waste" required>
+            </section>
+            <button class="custom-button" type="button" onclick="calculateCarbonFootprint()">Calculate Your Carbon Footprint</button>
+        </form>
+        <p id="result"></p>
+    
+        <script>
+            function calculateCarbonFootprint() {
+                const electricity = parseFloat(document.getElementById('electricity').value);
+                const fuel = parseFloat(document.getElementById('fuel').value);
+                const mileage = parseFloat(document.getElementById('mileage').value);
+                const flights = parseFloat(document.getElementById('flights').value);
+                const waste = parseFloat(document.getElementById('waste').value) * 4.33; // monthly (approx. weeks in a month)
+        
+                const carbon_per_kwh = 0.5; // kg CO2 per kWh
+                const carbon_per_gallon_fuel = 8.89; // kg CO2 per gallon of fuel
+                const carbon_per_mile = 0.404; // kg CO2 per mile driven
+                const carbon_per_flight = 0.2; // kg CO2 per flight
+        
+                const electricity_emissions = electricity * carbon_per_kwh;
+                const fuel_emissions = fuel * carbon_per_gallon_fuel;
+                const mileage_emissions = mileage * carbon_per_mile;
+                const flight_emissions = flights * carbon_per_flight;
+                const waste_emissions = waste * 0.2; // simple assumption
+        
+                const total_emissions = (electricity_emissions + fuel_emissions +
+                                         mileage_emissions + flight_emissions + waste_emissions);
+        
+                document.getElementById('result').innerText = `Your total carbon footprint is: ${total_emissions.toFixed(2)} kg CO2 per month`;
+            }
+        </script>
+    </ul>
+    
+    </section>
+    <section>
+        <h2>2. Climate Facts in a Click!</h2>
+        <p> Interactive Game about climate change using an LCD display and a button. When the player presses a button, a new climate fact appears on the screen, 
+            cycling through multiple facts about environmental issues.</p>
+        <img src="Interactive Game.png" alt="Logo" class="center">
+</section>
+     <!-- Footer -->
+     <footer class="footer">
+        <img src="logo.png" alt="Logo" class="footer-logo">
+        <div class="footer-contact">
+            <h2>Green Tales</h2>
+        </div>
+        <main>
+            <h2> Contact Us</h2>
+            <p>If you have any questions, feel free to contact us using the form below.</p>
+            <!-- نموذج الاتصال -->
+        </main>
+        <footer>
+            <p>&copy; 2024 GreenTales All rights reserved  .</p>
+        </footer>
+    
+</body>
+</html>

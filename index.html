@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenTales</title>
+    <style>
+        body {
+            background-color: #555; /* خلفية الصفحة */
+            color: #555; /* لون النص */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        header {
+            background-color: #2b7f2e; /* اللون الأخضر */
+            color: #fff; /* اللون الأبيض للنص */
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        nav ul {
+            list-style-type: none; /* إزالة النقاط من القائمة */
+            margin: 0;
+            padding: 0;
+            display: flex; /* جعل العناصر في سطر واحد */
+            justify-content: center; /* محاذاة العناصر في الوسط */
+            color: #fff; /* اللون الأبيض للنصوص */
+        }
+
+        nav ul li {
+            margin: 0 10px; /* إضافة مسافة بين العناصر */
+        }
+
+        nav ul li a {
+            color: #fff; /* اللون الأبيض للنصوص */
+            text-decoration: none; /* إزالة الخط السفلي */
+            padding: 10px 15px; /* إضافة مساحة حول النص */
+            display: block;
+        }
+
+        nav ul li a:hover {
+            background-color: #333; /* تغيير الخلفية عند التمرير */
+        }
+
+        .search-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 2px solid #252525;
+            border-radius: 8px;
+            box-sizing: border-box;
+            font-size: 16px;
+            outline: none;
+            background-color: #333; /* خلفية صندوق البحث */
+            color: #fff; /* لون نص صندوق البحث */
+            transition: border-color 0.3s;
+        }
+
+        .search-input:focus {
+            border-color: #007bff;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: #444; /* خلفية نتائج البحث */
+            border: 1px solid #444;
+            border-radius: 5px;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 99;
+            display: none; /* Start hidden */
+        }
+
+        .search-results div {
+            padding: 10px;
+            cursor: pointer;
+            color: #fff; /* لون نص نتائج البحث */
+        }
+
+        .search-results div:hover {
+            background-color: #555; /* تغيير الخلفية عند التمرير */
+        }
+
+        #muscle-strain,
+        #torsion {
+            background-color: #444; /* خلفية محتوى المعلومات */
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        #muscle-strain p,
+        #torsion p {
+            color: #d6d0d0; /* لون نص المحتوى */
+        }
+
+        .footer {
+            background-color: #111; /* خلفية التذييل */
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #444;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer-logo {
+            max-width: 150px;
+            margin-bottom: 10px;
+        }
+
+        .footer-contact,
+        .footer-pages {
+            margin: 10px 0;
+        }
+
+        .footer-contact p,
+        .footer-pages a {
+            margin: 5px 0;
+            color: #525050bd; /* لون نص التذييل */
+            text-decoration: none;
+        }
+
+        .footer-pages a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            font-size: 30px;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+
+        p {
+            font-size: 20px;
+        }
+
+        section {
+            padding: 2rem;
+            margin: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            margin-right: 20px;
+        }
+
+        .welcome {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            padding: 20px;
+        }
+
+        .text-boxes {
+            margin-bottom: 20px;
+        }
+
+        .text-box {
+            margin-bottom: 10px;
+        }
+
+        .products {
+            margin-bottom: 20px;
+        }
+
+        .product {
+            margin-bottom: 10px;
+        }
+
+        .feedback-form {
+            border-top: 1px solid #ddd;
+            padding-top: 20px;
+        }
+
+        .feedback-form h2 {
+            margin-top: 0;
+        }
+
+        .feedback-form textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            margin-top: 10px;
+        }
+
+        .feedback-form input[type="submit"] {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .feedback-form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        /* إضافة لخاصية إخفاء العناصر */
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نموذج التعليقات</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2); /* تدرج لوني خلفية الصفحة */
+        margin: 0;
+        padding: 0;
+    }
+
+    .feedback-form {
+        background: #fff; /* خلفية النموذج */
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ظل لتأثير ثلاثي الأبعاد */
+        max-width: 600px;
+        margin: 50px auto;
+        border: 1px solid #ddd;
+    }
+
+    .feedback-form h2 {
+        margin-top: 0;
+        color: #333; /* لون عنوان النموذج */
+        font-size: 28px;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .feedback-form label {
+        display: block;
+        margin-bottom: 8px;
+        color: #555; /* لون النصوص */
+        font-weight: bold;
+    }
+
+    .feedback-form input[type="text"],
+    .feedback-form input[type="email"],
+    .feedback-form textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 16px;
+        transition: border-color 0.3s, box-shadow 0.3s;
+    }
+
+    .feedback-form input[type="text"]:focus,
+    .feedback-form input[type="email"]:focus,
+    .feedback-form textarea:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* تأثير ظل عند التمرير */
+        outline: none;
+    }
+
+    .feedback-form textarea {
+        height: 150px;
+        resize: vertical; /* يسمح بتغيير حجم مربع النص عموديا */
+    }
+
+    .feedback-form input[type="submit"] {
+        padding: 12px 25px;
+        background-color: #007bff; /* خلفية زر الإرسال */
+        color: #fff; /* لون النص في الزر */
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .feedback-form input[type="submit"]:hover {
+        background-color: #0056b3; /* لون الزر عند التمرير */
+        transform: scale(1.05); /* تكبير الزر عند التمرير */
+    }
+
+    .feedback-form input[type="submit"]:active {
+        background-color: #004494; /* لون الزر عند الضغط */
+        transform: scale(1); /* إعادة حجم الزر إلى حجمه الأصلي */
+    }
+    .custom-button {
+            background-color: #4CAF50; /* Green background */
+            border: none;              /* No border */
+            color: white;              /* White text */
+            padding: 15px 32px;        /* Padding (height and width) */
+            text-align: center;        /* Center the text */
+            text-decoration: none;     /* No underline */
+            display: inline-block;     /* Make it inline */
+            font-size: 16px;           /* Increase text size */
+            margin: 10px 5px;          /* Space around the button */
+            cursor: pointer;           /* Pointer cursor on hover */
+            border-radius: 12px;       /* Rounded corners */
+            box-shadow: 0 4px #999;    /* 3D shadow effect */
+            
+        }
+
+        .custom-button:hover {
+            background-color: #3e8e41; /* Darker green on hover */
+            box-shadow: 0 6px #666;    /* Adjust shadow on hover */
+            transform: translateY(-2px); /* Lift effect on hover */
+        }
+
+        .custom-button:active {
+            background-color: #2E7D32; /* Darkest green when clicked */
+            box-shadow: 0 2px #666;    /* Smaller shadow when clicked */
+            transform: translateY(4px); /* Press down effect */
+        }
+        .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
+        }
+
+</style>
+<body>
+    <header>
+        <img src="logo.png" alt="Logo" class="logo" width="150" height="150">
+        <div class="header-content">
+            <div class="Welcome" style="font-size:40px;"><strong> Tell us a climate story!</strong></div>
+            <!-- Welcome text at the top -->
+
+  
+            <nav>
+                <ul>
+                       <li><a href="home.html" style="font-size:20px;"> <strong>Home</strong></a></li>
+                       <li><a href="stories.html" style="font-size:20px;"><strong>Stories</strong> </a></li>
+                       <li><a href="Your_region.html" style="font-size:20px;"><strong> Your region</strong></a></li>
+                       <li><a href="interactivegame.html" style="font-size:20px;"><strong>Interactive games</strong></a></li>           
+                       <li><a href="feedback.html" style="font-size:20px;"><strong>Your imapct</strong></a></li>
+                   </ul>
+           </nav>
+
+    </header>
+    <section>
+        <h2 align="center"  style="font-family:verdana"> Baltimore!</h2>
+        <img src="Balti.jfif" class="center" width="1000" height="500">
+    </section>
+    <section>
+    <h1>We do not have planet B!</h1>
+    <p>    The relentless march of climate change is a silent catastrophe, reshaping ecosystems, economies, and lives; to stand idle is to surrender our future. Climate change is now a real threat to life on Earth, caused by human activities that pollute the environment and lead to an increase in greenhouse gases such as carbon dioxide, leading to an unprecedented rise in temperatures and the destruction and sinking of some cities. We will now tell a story about one of the most important cities in America suffering from climate change and how it dealt with the consequences of climate change. Have you ever heard of Baltimore?</p>
+    <p>Baltimore is one of the most important industrial cities in America, and it suffers from severe climate change problems. After Baltimore felt the extreme danger surrounding it many areas were negatively affected by climate change, especially rising temperatures and floods. It did many things that would make it face climate change and limit its problems.</p>
+    <P>Baltimore was part of a larger research project that also included cities like Los Angeles, Indianapolis, and Washington, D.C., where scientists from institutions like the National Institute of Standards and Technology (NIST), the National Oceanic and Atmospheric Administration (NOAA), and NASA collaborated. These cities, despite their different topography and climates, are ideal test beds for measuring greenhouse gas emissions.</P>
+    <p>Baltimore has served as a testing ground for the National Institute of Standards and Technology’s Climate Change Research Project since 2015. The system aims to test measurements of greenhouse gases like carbon dioxide in urban areas, producing high-resolution measurements that will help cities and other regions better understand and manage the sources of these emissions. This is done through the use of accurate atmospheric measurements from towers and 45 air quality monitoring devices, in addition to more than 30 weather stations spread throughout the city.</p>
+    <p>The city of Baltimore has achieved remarkable results after the measures it has taken and the residents’ commitment to implementing these decisions and trying to help preserve the environment. This has also enabled them to provide a healthier and more just environment. </p>
+    <p>Penn State University has also played a prominent role in helping to solve the Baltimore problem, conducting multi-institutional studies aimed at better understanding the effects of climate change. Thanks to these multi-institution studies, researchers are seeking to develop new technologies that help integrate satellite information with ground-based sensors. This will give stakeholders a more comprehensive view of greenhouse gas emissions in Baltimore and beyond.</p>
+    <p><strong>In conclusion,</strong> the efforts of Baltimore residents in confronting climate change and the institutions that helped them achieve positive steps reflect the city’s commitment to a better future. Baltimore represents a model for how to address climate challenges and achieve positive change. Ultimately, preserving the environment is not just a choice, but a human duty towards future generations.</p>
+
+    </section>
+    <div style="text-align: center;">
+        <h4> Watch the video to know more about Baltimore</h4>
+        <video width="70%" controls>
+            <source src="Presented by - Mira Nouran Alzahraa (1).mp4" type="video/mp4">
+           
+        </video>    
+    </div>
+   
+
+    <!-- the video or the file uploading -->
+     <section> 
+    <h1>Upload a Video or Word File</h1>
+    <p>Make a video or a file(word or PDF) and upload it to tell us the story with your look!</p>
+    <div class="file-container" >
+        <input class="custom-button" type="file" id="fileUpload" accept=".mp4,.doc,.docx,.pdf" width="70%" controls/>
+    </div>
+
+    <div class="file-preview" id="filePreview" style="text-align: center;"></div>
+
+    <script >
+        document.getElementById('fileUpload').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            const filePreview = document.getElementById('filePreview');
+            filePreview.innerHTML = '';  // Clear previous preview
+
+            if (!file) {
+                return;
+            }
+
+            // Display video if it's a video file
+            if (file.type.startsWith('video/')) {
+                const video = document.createElement('video');
+                video.src = URL.createObjectURL(file);
+                video.controls = true;
+                filePreview.appendChild(video);
+            }
+            // Display embedded Word file (or PDF) using an iframe for Word docs
+            else if (file.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' || file.type === 'application/msword' || file.type === 'application/pdf') {
+                const iframe = document.createElement('iframe');
+                iframe.src = URL.createObjectURL(file);
+                filePreview.appendChild(iframe);
+            } else {
+                filePreview.textContent = 'Unsupported file type.';
+            }
+
+            // Limit to only one file upload at a time
+            event.target.value = '';  // Clear the input after handling the file
+        });
+    </script>
+    </section>
+
+     <!-- Footer -->
+     <footer class="footer">
+        <img src="logo.png" alt="Logo" class="footer-logo">
+        <div class="footer-contact">
+            <h2>Green Tales</h2>
+        </div>
+        <main>
+            <h2> Contact Us</h2>
+            <p>If you have any questions, feel free to contact us using the form below.</p>
+            <!-- نموذج الاتصال -->
+        </main>
+        <footer>
+            <p>&copy; 2024 GreenTales All rights reserved  .</p>
+        </footer>
+    
+</body>
+</html>
